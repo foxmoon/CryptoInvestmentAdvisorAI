@@ -1,0 +1,87 @@
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { AssetController } from '../../src/controllers/AssetController.js';
+import { AssetUtil } from '../../src/utils/AssetUtil.js';
+import { ApiController } from '../../src/controllers/ApiController.js';
+// - Mocks ---------------------------------------------------------------------
+const connector = {
+    imageUrl: undefined,
+    imageId: 'walletconnect'
+};
+const connectorWithImageUrl = {
+    imageUrl: 'walletconnect-connector-logo-src',
+    imageId: 'walletconnect'
+};
+const network = {
+    imageUrl: undefined,
+    imageId: 'ethereum'
+};
+const networkWithImageUrl = {
+    imageUrl: 'ethereum-logo-src',
+    imageId: 'ethereum'
+};
+const wallet = {
+    image_url: undefined,
+    image_id: 'metamask'
+};
+const walletWithImageUrl = {
+    image_url: 'metamask-logo-src',
+    image_id: 'metamask'
+};
+// -- Setup --------------------------------------------------------------------
+ApiController._fetchWalletImage = vi.fn().mockImplementation((walletId) => {
+    AssetController.state = {
+        ...AssetController.state,
+        walletImages: {
+            ...AssetController.state.walletImages,
+            [walletId]: `new-wallet-image-url-${walletId}`
+        }
+    };
+});
+beforeEach(() => {
+    AssetController.state = {
+        ...AssetController.state,
+        connectorImages: {
+            walletconnect: 'walletconnect-connector-logo-blob-url'
+        },
+        walletImages: {
+            metamask: 'metamask-logo-blob-url'
+        },
+        networkImages: {
+            ethereum: 'ethereum-logo-blob-url'
+        }
+    };
+});
+// -- Tests --------------------------------------------------------------------
+describe('AssetUtil', () => {
+    it('should get the connector image from connector object', () => {
+        // @ts-expect-error it's a partial connector object
+        expect(AssetUtil.getConnectorImage(connectorWithImageUrl)).toBe('walletconnect-connector-logo-src');
+    });
+    it('should get the connector image from AssetController state', () => {
+        // @ts-expect-error it's a partial connector object
+        expect(AssetUtil.getConnectorImage(connector)).toBe('walletconnect-connector-logo-blob-url');
+    });
+    it('should get the network image from network object', () => {
+        // @ts-expect-error it's a partial connector object
+        expect(AssetUtil.getNetworkImage(networkWithImageUrl)).toBe('ethereum-logo-src');
+    });
+    it('should get the network image from AssetController state', () => {
+        // @ts-expect-error it's a partial connector object
+        expect(AssetUtil.getNetworkImage(network)).toBe('ethereum-logo-blob-url');
+    });
+    it('should get the wallet image from wallet object', () => {
+        // @ts-expect-error it's a partial connector object
+        expect(AssetUtil.getWalletImage(walletWithImageUrl)).toBe('metamask-logo-src');
+    });
+    it('should get the wallet image from AssetController state', () => {
+        // @ts-expect-error it's a partial connector object
+        expect(AssetUtil.getWalletImage(wallet)).toBe('metamask-logo-blob-url');
+    });
+    it('should get the wallet with image id', () => {
+        expect(AssetUtil.getWalletImageById(wallet.image_id)).toBe('metamask-logo-blob-url');
+    });
+    it('should fetch the wallet with image id', async () => {
+        expect(await AssetUtil.fetchWalletImage('rainbow-id')).toBe('new-wallet-image-url-rainbow-id');
+    });
+});
+//# sourceMappingURL=AssetUtil.test.js.map

@@ -1,0 +1,46 @@
+import type { AppKitSdkVersion, Balance, ChainNamespace } from '@reown/appkit-common';
+import type { CaipAddress, CaipNetwork } from '@reown/appkit-common';
+import type { ChainAdapter, LinkingRecord } from './TypeUtil.js';
+type SDKFramework = 'html' | 'react' | 'vue';
+export declare const CoreHelperUtil: {
+    isMobile(): boolean;
+    checkCaipNetwork(network: CaipNetwork | undefined, networkName?: string): boolean | undefined;
+    isAndroid(): boolean;
+    isIos(): boolean;
+    isClient(): boolean;
+    isPairingExpired(expiry?: number): boolean;
+    isAllowedRetry(lastRetry: number): boolean;
+    copyToClopboard(text: string): void;
+    getPairingExpiry(): number;
+    getNetworkId(caipAddress: CaipAddress | undefined): string | undefined;
+    getPlainAddress(caipAddress: CaipAddress | undefined): string | undefined;
+    wait(milliseconds: number): Promise<unknown>;
+    debounce(func: (...args: any[]) => unknown, timeout?: number): (...args: unknown[]) => void;
+    isHttpUrl(url: string): boolean;
+    formatNativeUrl(appUrl: string, wcUri: string): LinkingRecord;
+    formatUniversalUrl(appUrl: string, wcUri: string): LinkingRecord;
+    openHref(href: string, target: '_blank' | '_self' | 'popupWindow', features?: string): void;
+    returnOpenHref(href: string, target: '_blank' | '_self' | 'popupWindow', features?: string): Window | null;
+    preloadImage(src: string): Promise<unknown>;
+    formatBalance(balance: string | undefined, symbol: string | undefined): string;
+    formatBalance2(balance: string | undefined, symbol: string | undefined): {
+        value: string;
+        rest: string;
+        symbol: string | undefined;
+    };
+    getApiUrl(): "https://api.web3modal.org";
+    getBlockchainApiUrl(): "https://rpc.walletconnect.org";
+    getAnalyticsUrl(): "https://pulse.walletconnect.org";
+    getUUID(): string;
+    parseError(error: any): string;
+    sortRequestedNetworks(approvedIds: `${string}:${string}`[] | undefined, requestedNetworks?: CaipNetwork[]): CaipNetwork[];
+    calculateBalance(array: Balance[]): number;
+    formatTokenBalance(number: number): {
+        dollars: string | undefined;
+        pennies: string | undefined;
+    };
+    isAddress(address: string, chain?: ChainNamespace): boolean;
+    uniqueBy<T>(arr: T[], key: keyof T): T[];
+    generateSdkVersion(adapters: ChainAdapter[], platform: SDKFramework, version: string): AppKitSdkVersion;
+};
+export {};

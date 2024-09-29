@@ -1,0 +1,24 @@
+import type { AuthConnector, Connector } from '../utils/TypeUtil.js';
+interface ConnectorWithProviders extends Connector {
+    connectors?: Connector[];
+}
+export interface ConnectorControllerState {
+    allConnectors: Connector[];
+    connectors: ConnectorWithProviders[];
+}
+export declare const ConnectorController: {
+    state: ConnectorControllerState;
+    subscribeKey<K extends keyof ConnectorControllerState>(key: K, callback: (value: ConnectorControllerState[K]) => void): () => void;
+    setConnectors(connectors: ConnectorControllerState['connectors']): void;
+    mergeMultiChainConnectors(connectors: Connector[]): ConnectorWithProviders[];
+    generateConnectorMapByName(connectors: Connector[]): Map<string, Connector[]>;
+    getConnectorName(name: string | undefined): string | undefined;
+    getUniqueConnectorsByName(connectors: Connector[]): Connector[];
+    addConnector(connector: Connector | AuthConnector): void;
+    getAuthConnector(): AuthConnector | undefined;
+    getAnnouncedConnectorRdns(): (string | undefined)[];
+    getConnectors(): ConnectorWithProviders[];
+    getConnector(id: string, rdns?: string | null): ConnectorWithProviders | undefined;
+    syncIfAuthConnector(connector: Connector | AuthConnector): void;
+};
+export {};

@@ -23,7 +23,7 @@
     "marked": "^14.1.2",
     "next": "14.2.13",
     "next-auth": "^4.24.8",
-    "react": "link:@reown/appkit/react",
+    "react": "^18.3.1",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.3.1",
     "viem": "^2.21.15",

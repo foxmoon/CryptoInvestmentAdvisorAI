@@ -1,0 +1,26 @@
+/* 外部CSS文件 */
+.advisor-image {
+    width: 150px;
+    height: 150px;
+    background-image: url('/images/headers.png');
+    background-size: 300px 300px; /* 假设整张图片的大小是 300x300 像素 */
+    border-radius: 50%; /* 圆形头像 */
+    background-repeat: no-repeat;
+    margin-bottom: 10px;
+  }
+  
+  .advisor-soros {
+    background-position: 0 0; /* 显示左上角的头像 */
+  }
+  
+  .advisor-buffett {
+    background-position: -150px 0; /* 显示右上角的头像 */
+  }
+  
+  .advisor-dalio {
+    background-position: 0 -150px; /* 显示左下角的头像 */
+  }
+  
+  .advisor-wood {
+    background-position: -150px -150px; /* 显示右下角的头像 */
+  }

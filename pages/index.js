@@ -135,6 +135,12 @@ ${allAdvice}
         <div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
           <div className="max-w-md mx-auto">
             <h1 className="text-2xl font-semibold mb-5">Crypto Investment Advisor AI</h1>
+            <a href="https://www.buymeacoffee.com/OpenFusion" target="_blank" rel="noopener noreferrer">
+          <img 
+            src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=OpenFusion&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" 
+            alt="Buy me a coffee"
+          />
+        </a>
             <WalletConnection />
             <form onSubmit={handleSubmit} className="mt-8 space-y-6">
               <div>
